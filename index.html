@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="LSNS-6 社會網絡量表中文工作版：供課堂練習使用，結果只留在你的裝置上。" />
+    <title>LSNS-6 社會網絡量表｜學生練習版</title>
+    <style>
+      :root { --ink:#16342f; --muted:#5d706b; --paper:#fcfaf4; --panel:#ffffff; --line:#dbe5df; --mint:#d9eee4; --accent:#196d59; --accent-dark:#0f4f41; --warn:#fff3cf; }
+      * { box-sizing:border-box; }
+      body { margin:0; color:var(--ink); background:radial-gradient(circle at 80% 5%,#e1f2eb 0,transparent 28rem),var(--paper); font-family:ui-rounded,"Noto Sans TC","PingFang TC",system-ui,sans-serif; line-height:1.6; }
+      .wrap { width:min(900px,calc(100% - 32px)); margin:auto; }
+      header { padding:56px 0 32px; }
+      .eyebrow { display:inline-block; padding:5px 12px; border-radius:99px; background:var(--mint); color:var(--accent-dark); font-size:.9rem; font-weight:700; letter-spacing:.04em; }
+      h1 { margin:14px 0 8px; font-size:clamp(2rem,5vw,3.25rem); letter-spacing:-.04em; line-height:1.16; }
+      .lead { max-width:650px; margin:0; color:var(--muted); font-size:1.05rem; }
+      .notice { margin:12px 0 26px; padding:13px 16px; border-left:4px solid #d49a22; background:var(--warn); border-radius:0 12px 12px 0; font-size:.94rem; }
+      .card { background:var(--panel); border:1px solid var(--line); border-radius:20px; box-shadow:0 8px 28px rgba(31,67,56,.07); overflow:hidden; }
+      .intro { padding:24px 26px; border-bottom:1px solid var(--line); }
+      .intro h2,.results h2 { margin:0 0 7px; font-size:1.2rem; }
+      .intro p { margin:0; color:var(--muted); }
+      .scoring-note { margin-top:16px; padding:14px 16px; border-radius:12px; background:#f4f8f5; color:#405a52; font-size:.92rem; }
+      .scoring-note h3 { margin:0 0 6px; color:var(--accent-dark); font-size:.98rem; }
+      .scoring-note ol { margin:0; padding-left:1.25rem; }
+      .scoring-note li { margin:.25em 0; }
+      fieldset { margin:0; padding:0; border:0; }
+      .section { padding:22px 26px 8px; }
+      .section-title { display:flex; align-items:center; gap:10px; margin:0 0 8px; font-size:1.2rem; }
+      .num { display:grid; place-items:center; width:27px; height:27px; border-radius:50%; background:var(--mint); color:var(--accent-dark); font-size:.85rem; }
+      .hint { margin:0 0 14px 37px; color:var(--muted); font-size:.9rem; }
+      .question { padding:18px 0; border-top:1px solid var(--line); }
+      .question legend { width:100%; padding:0; font-weight:700; }
+      .choices { display:grid; grid-template-columns:repeat(6,1fr); gap:7px; margin-top:12px; }
+      .choice input { position:absolute; opacity:0; pointer-events:none; }
+      .choice span { display:flex; min-height:55px; align-items:center; justify-content:center; padding:6px; text-align:center; border:1px solid #cbd9d2; border-radius:11px; color:var(--muted); background:#fff; font-size:.84rem; cursor:pointer; transition:.16s ease; }
+      .choice span strong { display:block; color:var(--ink); font-size:1rem; }
+      .choice input:checked + span { border-color:var(--accent); background:var(--accent); color:#fff; box-shadow:0 2px 8px #196d5940; }
+      .choice input:checked + span strong { color:#fff; }
+      .choice input:focus-visible + span { outline:3px solid #f0b53b; outline-offset:2px; }
+      .controls { display:flex; gap:12px; flex-wrap:wrap; padding:25px 26px 28px; }
+      button { border:0; border-radius:12px; padding:12px 18px; font:inherit; font-weight:750; cursor:pointer; }
+      #score { background:var(--accent); color:#fff; } #score:hover { background:var(--accent-dark); }
+      #reset { background:#eef3f0; color:var(--ink); }
+      .results { display:none; margin:0 26px 28px; padding:22px; border-radius:16px; background:#edf8f2; border:1px solid #cae7d8; }
+      .results.show { display:block; }
+      .score-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 0; }
+      .score-box { padding:13px; text-align:center; background:#fff; border-radius:12px; }
+      .score-box b { display:block; color:var(--accent-dark); font-size:1.65rem; line-height:1.15; }
+      .score-box span { font-size:.85rem; color:var(--muted); }
+      #interpretation { margin:0; }
+      .result-guide { margin-top:18px; padding-top:16px; border-top:1px solid #cae7d8; }
+      .result-guide h3 { margin:0 0 9px; font-size:1rem; }
+      .result-guide ul { margin:0; padding-left:1.25rem; }
+      .result-guide li { margin:.4em 0; }
+      .result-next { margin:15px 0 0; padding:12px 14px; border-radius:10px; background:#fff; color:#3b5850; font-size:.92rem; }
+      footer { padding:24px 0 48px; color:var(--muted); font-size:.84rem; }
+      footer p { margin:.45em 0; }
+      @media (max-width:600px) { .wrap { width:min(100% - 20px,900px); } header { padding-top:34px; } .intro,.section,.controls { padding-left:17px; padding-right:17px; } .choices { grid-template-columns:repeat(3,1fr); } .results { margin-left:17px; margin-right:17px; } .score-grid { grid-template-columns:1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <header>
+        <span class="eyebrow">課堂自我檢核</span>
+        <h1>LSNS-6 社會網絡量表</h1>
+        <p class="lead">六個問題，認識自己與親戚、朋友的日常連結。填答結果只在目前瀏覽器中計算，不會上傳或儲存。</p>
+      </header>
+
+      <p class="notice"><strong>使用提醒：</strong>本頁為中文工作版與教學用途，並非醫療診斷或心理評估結果。如孤立感帶來持續困擾，請與可信任的人、校內輔導資源或專業人員談談。</p>
+
+      <form class="card" id="lsns-form" novalidate>
+        <div class="intro">
+          <h2>怎麼回答？</h2><p>請依符合的人數選一項。這些人可以是親戚或朋友；不必是每天聯絡的人。</p>
+          <div class="scoring-note"><h3>評分說明</h3><ol><li>六題直接加總，總分 <strong>0–30 分</strong>；沒有反向題。</li><li>親戚網絡：第 1–3 題加總，<strong>0–15 分</strong>。</li><li>朋友網絡：第 4–6 題加總，<strong>0–15 分</strong>。</li><li>分數愈低，代表社會網絡愈小、社會孤立風險愈高。</li><li>常用判準：<strong>總分 &lt;12 分</strong>＝社會孤立風險；任一分量表 <strong>&lt;6 分</strong>＝該親戚／朋友網絡不足。</li></ol></div>
+        </div>
+        <div id="questions"></div>
+        <div class="controls"><button type="submit" id="score">查看結果</button><button type="button" id="reset">重新填答</button></div>
+        <section class="results" id="results" aria-live="polite">
+          <h2>你的結果</h2>
+          <div class="score-grid"><div class="score-box"><b id="total">—</b><span>總分／30</span></div><div class="score-box"><b id="family">—</b><span>親戚網絡／15</span></div><div class="score-box"><b id="friends">—</b><span>朋友網絡／15</span></div></div>
+          <p id="interpretation"></p>
+          <div class="result-guide">
+            <h3>怎麼理解這些分數？</h3>
+            <ul>
+              <li><strong>總分：</strong>反映目前可接觸、可談心或可求助的親戚與朋友網絡；分數越高，代表可運用的社會連結越多。</li>
+              <li><strong>親戚／朋友分數：</strong>有助於分別看見哪一類網絡較少。低分不代表人際關係不好，只是可能表示這類支持較不容易取得。</li>
+              <li><strong>參考值：</strong>總分低於 12 分、或任一分量表低於 6 分時，可作為留意社會連結的提醒，而不是診斷或標籤。</li>
+            </ul>
+            <p class="result-next" id="next-step"></p>
+          </div>
+        </section>
+      </form>
+      <footer>
+        <p>計分：每題 0–5 分；總分 0–30 分。總分低於 12 分，或任一分量表低於 6 分，通常表示可進一步留意社會網絡是否不足。</p>
+        <p>LSNS-6（Lubben Social Network Scale-6）用於評估社會網絡與社會孤立風險。請依課程或研究倫理規範使用正式授權版本。</p>
+      </footer>
+    </main>
+    <script>
+      const questions = [
+        { group: '親戚網絡', title: '親戚', text: '有多少位親戚，至少每個月會與您見面或聯絡一次？' },
+        { group: '親戚網絡', title: '親戚', text: '有多少位親戚，是您可以自在談論私人事情的？' },
+        { group: '親戚網絡', title: '親戚', text: '當您需要幫助時，有多少位親戚可以求助？' },
+        { group: '朋友網絡', title: '朋友', text: '有多少位朋友，至少每個月會與您見面或聯絡一次？' },
+        { group: '朋友網絡', title: '朋友', text: '有多少位朋友，是您可以自在談論私人事情的？' },
+        { group: '朋友網絡', title: '朋友', text: '當您需要幫助時，有多少位朋友可以求助？' }
+      ];
+      const labels = ['0 位', '1 位', '2 位', '3–4 位', '5–8 位', '9 位以上'];
+      const container = document.querySelector('#questions');
+      ['親戚網絡', '朋友網絡'].forEach((group, sectionIndex) => {
+        const section = document.createElement('section'); section.className = 'section';
+        section.innerHTML = `<h2 class="section-title"><span class="num">${sectionIndex + 1}</span>${group}</h2><p class="hint">請想想平時有來往、可提供支持的 ${sectionIndex ? '朋友' : '親戚'}。</p>`;
+        questions.filter(q => q.group === group).forEach((q, i) => {
+          const index = sectionIndex * 3 + i;
+          const fieldset = document.createElement('fieldset'); fieldset.className = 'question';
+          fieldset.innerHTML = `<legend>${index + 1}. ${q.text}</legend><div class="choices">${labels.map((label, value) => `<label class="choice"><input required type="radio" name="q${index}" value="${value}"><span><strong>${value}</strong>${label}</span></label>`).join('')}</div>`;
+          section.appendChild(fieldset);
+        });
+        container.appendChild(section);
+      });
+      const form = document.querySelector('#lsns-form'); const results = document.querySelector('#results');
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const values = questions.map((_, i) => form.elements[`q${i}`].value);
+        if (values.some(v => v === '')) { alert('請完成全部六題後再查看結果。'); return; }
+        const nums = values.map(Number), family = nums.slice(0,3).reduce((a,b)=>a+b,0), friends = nums.slice(3).reduce((a,b)=>a+b,0), total = family + friends;
+        document.querySelector('#total').textContent = total; document.querySelector('#family').textContent = family; document.querySelector('#friends').textContent = friends;
+        const notes = [];
+        notes.push(total < 12 ? '總分低於常用的社會孤立風險參考值（12 分）。' : '總分達到或高於常用的社會孤立風險參考值（12 分）。');
+        if (family < 6) notes.push('親戚網絡分數低於 6 分。'); if (friends < 6) notes.push('朋友網絡分數低於 6 分。');
+        notes.push('這不是診斷；可把結果當成一次覺察與討論的起點。'); document.querySelector('#interpretation').textContent = notes.join(' ');
+        let next = '你可以想一想：有哪些人是你想多保持聯繫、也願意在需要時向他們求助的？';
+        if (total < 12 && family < 6 && friends < 6) next = '如果你近期常感到缺乏支持，可試著從一位可信任的人開始聯絡；若困擾持續，也可使用校內輔導或專業支持資源。';
+        else if (family < 6 && friends < 6) next = '親戚與朋友兩類支持都較少時，可考慮從課堂、社團、社區活動或一位可信任的人開始建立連結。';
+        else if (family < 6) next = '親戚網絡較少不代表關係有問題；可想想是否有其他值得信任的人能在需要時提供支持。';
+        else if (friends < 6) next = '朋友網絡較少時，可從一段現有關係或共同興趣的活動開始，慢慢增加日常連結。';
+        document.querySelector('#next-step').textContent = next;
+        results.classList.add('show'); results.scrollIntoView({behavior:'smooth', block:'nearest'});
+      });
+      document.querySelector('#reset').addEventListener('click', () => { form.reset(); results.classList.remove('show'); window.scrollTo({top:0,behavior:'smooth'}); });
+    </script>
+  </body>
+</html>
